@@ -60,7 +60,7 @@ def get_report(option="Today", start_=None, end_=None) -> pandas.DataFrame:
     client_timezone = "America/Santiago"
 
     if option == "Monthly":
-        start_ = "2023-05-01"
+        start_ = "2023-06-05"
         end_ = "2023-06-30"
         today = datetime.datetime.now(timezone(client_timezone))
         date_from_offset = datetime.datetime.fromisoformat(start_).astimezone(
@@ -190,7 +190,7 @@ st.sidebar.caption(f"Page reload doesn't refresh the data.\nInstead, use this bu
 
 option = st.sidebar.selectbox(
     "Select report date:",
-    ["Weekly", "Received", "Today", "Yesterday", "Tomorrow"]
+    ["Weekly", "Monthly", "Received", "Today", "Yesterday", "Tomorrow"]
 )
 
 
