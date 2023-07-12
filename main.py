@@ -19,7 +19,7 @@ FILE_BUFFER = io.BytesIO()
 
 def get_claims(secret, date_from, date_to, cursor=0):
     url = API_URL
-    timezone_offset = "-04:00"
+    timezone_offset = "-05:00"
     payload = json.dumps({
         "created_from": f"{date_from}T00:00:00{timezone_offset}",
         "created_to": f"{date_to}T23:59:59{timezone_offset}",
@@ -57,19 +57,19 @@ def get_report(option="Today", start_=None, end_=None) -> pandas.DataFrame:
     elif option == "Received":
         offset_back = 0
     
-    client_timezone = "America/Santiago"
+    client_timezone = "America/Lima"
 
     if option == "Monthly":
-        start_ = "2023-06-05"
-        end_ = "2023-06-30"
+        start_ = "2023-07-01"
+        end_ = "2023-07-31"
         today = datetime.datetime.now(timezone(client_timezone))
         date_from_offset = datetime.datetime.fromisoformat(start_).astimezone(
             timezone(client_timezone)) - datetime.timedelta(days=1)
         date_from = date_from_offset.strftime("%Y-%m-%d")
         date_to = end_
     elif option == "Weekly":
-        start_ = "2023-06-12"
-        end_ = "2023-06-19"
+        start_ = "2023-07-10"
+        end_ = "2023-07-16"
         today = datetime.datetime.now(timezone(client_timezone))
         date_from_offset = datetime.datetime.fromisoformat(start_).astimezone(
             timezone(client_timezone)) - datetime.timedelta(days=1)
@@ -257,7 +257,7 @@ if option == "Received":
 print(f"{datetime.datetime.now()}: Displaying dataframe")
 st.dataframe(filtered_frame)
 
-client_timezone = "America/Santiago"
+client_timezone = "America/Lima"
 TODAY = datetime.datetime.now(timezone(client_timezone)).strftime("%Y-%m-%d") \
     if option == "Today" \
     else datetime.datetime.now(timezone(client_timezone)) - datetime.timedelta(days=1)
@@ -487,7 +487,7 @@ with st.expander(":round_pushpin: Orders on a map:"):
             pdk.Layer(
                 'ScatterplotLayer',
                 data=filtered_frame,
-                get_position=[-70.6945098, -33.3688048],
+                get_position=[-77.1525865, -12.0262542],
                 get_color='[0, 128, 255, 160]',
                 get_radius=250,
                 pickable=True
